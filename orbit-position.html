@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Orbit Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="orbit-position.css">
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-content">
+            <h1 class="welcome-title">Asteroid Orbit Tracker</h1>
+            <p class="welcome-subtitle">Real-time visualization of asteroid positions in our solar system</p>
+            <button class="start-btn glow-button" onclick="startTracking()">Begin Tracking</button>
+        </div>
+    </div>
+
+    <!-- Main Tracking Screen -->
+    <div id="main-screen" class="screen">
+        <canvas id="orbit-canvas"></canvas>
+        
+        <div class="dialog-box info-panel">
+            <div class="info-title">Asteroid Data</div>
+            <div class="info-item">
+                <div class="info-label">Name</div>
+                <div class="info-value" id="asteroid-name">433 Eros</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Distance from Sun</div>
+                <div class="info-value" id="distance">1.46 AU</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Distance from Earth</div>
+                <div class="info-value" id="earth-distance">0.52 AU</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Orbital Velocity</div>
+                <div class="info-value" id="velocity">24.36 km/s</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Position Angle</div>
+                <div class="info-value" id="angle">127.5°</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Orbital Period</div>
+                <div class="info-value" id="period">643 days</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn" onclick="changeSpeed(-1)">Slower</button>
+            <button class="control-btn" onclick="togglePause()">⏸ Pause</button>
+            <button class="control-btn" onclick="changeSpeed(1)">Faster</button>
+            <button class="control-btn glow-button" onclick="showSearchDialog()">🔍 Search Asteroid</button>
+        </div>
+    </div>
+
+    <!-- Search Dialog -->
+    <div id="search-dialog" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+        <div class="dialog-box" style="padding: 2rem; width: 400px;">
+            <h2 style="color: #38bdf8; margin-top: 0;">Search Asteroid</h2>
+            <input type="text" id="asteroid-search" placeholder="Enter asteroid name or number (e.g., Ceres, 433)" 
+                style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.4); 
+                background: rgba(15, 23, 42, 0.6); color: white; font-size: 1rem; margin-bottom: 1rem;">
+            <div id="search-status" style="color: #38bdf8; margin-bottom: 1rem; min-height: 20px;"></div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="control-btn" onclick="searchAsteroid()" style="flex: 1;">Search</button>
+                <button class="control-btn" onclick="closeSearchDialog()" style="flex: 1;">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div id="search-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background: rgba(0, 0, 0, 0.7); z-index: 999;" onclick="closeSearchDialog()"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="orbit-position.js"></script>
+</body>
+</html>
