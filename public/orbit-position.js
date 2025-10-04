@@ -273,7 +273,7 @@ async function searchAsteroid() {
         
         try {
             // Try local backend proxy first
-            response = await fetch(`http://localhost:3001/api/asteroid/${encodeURIComponent(searchInput)}`);
+            response = await fetch(`https://orbit-position-xscw.vercel.app/api/asteroid/${encodeURIComponent(searchInput)}`);
             data = await response.json();
         } catch (localError) {
             // If local proxy fails, try public CORS proxy as fallback
@@ -362,3 +362,4 @@ window.addEventListener('resize', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 });
+
